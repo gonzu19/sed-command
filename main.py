@@ -17,6 +17,12 @@ def print_only_explicit(array: list, instruction: str) -> None:
             print(array[i])
 
 
+def filtering(array: list, word: str) -> None:
+    for quote in array:
+        if word in quote:
+            print(quote)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
                                     description="Count lines, words, "
@@ -41,17 +47,21 @@ def main() -> None:
     args = parser.parse_args()
     with open(args.filename, "r") as read_file:
         content = read_file.readlines()
-    if "/" in args.regex:
+    parts_of_regex = args.regex.split("/")
+    if parts_of_regex[0] == "s" and len(parts_of_regex) == 4:
         changed_quotes = substitute(array=content, regex=args.regex)
         if not args.quiet:
             for qu in changed_quotes:
                 print(qu)
         else:
-            _, _, new_word, _ = args.regex.split("/")
+            _, _, new_word, _ = parts_of_regex
             for quo in changed_quotes:
                 if new_word in quo:
                     print(quo)
-    else:
+    elif len(parts_of_regex) == 3:
+        filtering(array=content, word=parts_of_regex[1])
+
+    elif len(parts_of_regex) == 1:
         print_only_explicit(array=content, instruction=args.regex)
 
 
