@@ -43,13 +43,16 @@ def main() -> None:
         content = read_file.readlines()
     if "/" in args.regex:
         changed_quotes = substitute(array=content, regex=args.regex)
-        for qu in changed_quotes:
-            print(qu)
-    elif args.quiet:
-        print_only_explicit(array=content, instruction=args.regex)
+        if not args.quiet:
+            for qu in changed_quotes:
+                print(qu)
+        else:
+            _, _, new_word, _ = args.regex.split("/")
+            for quo in changed_quotes:
+                if new_word in quo:
+                    print(quo)
     else:
-        for quote in content:
-            print(quote)
+        print_only_explicit(array=content, instruction=args.regex)
 
 
 if __name__ == '__main__':
