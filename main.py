@@ -22,6 +22,7 @@ def filtering(array: list, word: str) -> None:
         if word in quote:
             print(quote.rstrip())
 
+
 def print_with_double_line_jump(array: list) -> None:
     for element in array:
         print(element)
