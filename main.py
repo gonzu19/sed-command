@@ -14,13 +14,13 @@ def print_only_explicit(array: list, instruction: str) -> None:
         instruction = instruction.rstrip("p")
         first, last = instruction.split(",")
         for i in range(int(first)-1, int(last)):
-            print(array[i])
+            print(array[i].rstrip())
 
 
 def filtering(array: list, word: str) -> None:
     for quote in array:
         if word in quote:
-            print(quote)
+            print(quote.rstrip())
 
 
 def main() -> None:
@@ -52,12 +52,12 @@ def main() -> None:
         changed_quotes = substitute(array=content, regex=args.regex)
         if not args.quiet:
             for qu in changed_quotes:
-                print(qu)
+                print(qu.rstrip())
         else:
             _, _, new_word, _ = parts_of_regex
             for quo in changed_quotes:
                 if new_word in quo:
-                    print(quo)
+                    print(quo.rstrip())
     elif len(parts_of_regex) == 3:
         filtering(array=content, word=parts_of_regex[1])
 
