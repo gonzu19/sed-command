@@ -10,10 +10,11 @@ def substitute(array: list, regex: str) -> list:
 
 
 def print_only_explicit(array: list, instruction: str) -> None:
-    instruction = instruction.rstrip("p")
-    first, last = instruction.split(",")
-    for i in range(int(first)-1, int(last)):
-        print(array[i])
+    if instruction[-1] == "p":
+        instruction = instruction.rstrip("p")
+        first, last = instruction.split(",")
+        for i in range(int(first)-1, int(last)):
+            print(array[i])
 
 
 def main() -> None:
