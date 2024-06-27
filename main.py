@@ -9,6 +9,13 @@ def substitute(array: list, regex: str) -> list:
     return new_array
 
 
+def print_only_explicit(array: list, instruction: str) -> None:
+    instruction = instruction.rstrip("p")
+    first, last = instruction.split(",")
+    for i in range(int(first)-1, int(last)):
+        print(array[i])
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
                                     description="Count lines, words, "
@@ -33,9 +40,15 @@ def main() -> None:
     args = parser.parse_args()
     with open(args.filename, "r") as read_file:
         content = read_file.readlines()
-    changed_quotes = substitute(array=content, regex=args.regex)
-    for qu in changed_quotes:
-        print(qu)
+    if "/" in args.regex:
+        changed_quotes = substitute(array=content, regex=args.regex)
+        for qu in changed_quotes:
+            print(qu)
+    elif args.quiet:
+        print_only_explicit(array=content, instruction=args.regex)
+    else:
+        for quote in content:
+            print(quote)
 
 
 if __name__ == '__main__':
