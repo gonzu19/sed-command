@@ -22,6 +22,10 @@ def filtering(array: list, word: str) -> None:
         if word in quote:
             print(quote.rstrip())
 
+def print_with_double_line_jump(array: list) -> None:
+    for element in array:
+        print(element)
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(
@@ -58,6 +62,8 @@ def main() -> None:
             for quo in changed_quotes:
                 if new_word in quo:
                     print(quo.rstrip())
+    elif len(parts_of_regex) == 1 and parts_of_regex[0] == "G":
+        print_with_double_line_jump(array=content)
     elif len(parts_of_regex) == 3:
         filtering(array=content, word=parts_of_regex[1])
 
