@@ -5,7 +5,8 @@ def substitute(array: list, regex: str) -> list:
     _, replaced_word, new_word, _ = regex.split("/")
     new_array = []
     for text in array:
-        new_array.append(text.replace(replaced_word, new_word))
+        if text != "\n":
+            new_array.append(text.replace(replaced_word, new_word))
     return new_array
 
 
@@ -25,7 +26,8 @@ def filtering(array: list, word: str) -> None:
 
 def print_with_double_line_jump(array: list) -> None:
     for element in array:
-        print(element)
+        if element != "\n":
+            print(element)
 
 
 def main() -> None:
